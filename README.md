@@ -1,4 +1,4 @@
-# a-star-algorithm
+# A* (A Star) Algorithm
 
 Implementação de um algoritmo A* (A star)
 
