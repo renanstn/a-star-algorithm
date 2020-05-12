@@ -146,8 +146,13 @@ def a_star(maze, start, end):
 
         # Verifica se chegou ao destino
         if current_node == end_node:
-            print('Node destino alcançado!')
-            return
+            path = []
+            current = current_node
+            while current is not None:
+                path.append(current.position)
+                current = current.parent
+            # Retorna o caminho reverso
+            return path[::-1]
 
         # Adiciona como children os nodes adjacentes
         childrens = current_node.get_childrens()
@@ -158,11 +163,16 @@ def a_star(maze, start, end):
                 continue
 
             # Calcula os valores de F, G, e H para cada vizinho
-            child.g = ''
-            child.h = ''
-            child.f = ''
+            child.g = current_node.g + 1
+            child.h = ((child.position[0] - end_node.position[0]) ** 2) + ((child.position[1] - end_node.position[1]) ** 2)
+            child.f = child.g + child.h
 
-        # maze.print_maze_highlighting_nodes(childrens)
+            if child in open_list:
+                index = open_list.index(child)
+                if child.g > open_list[index].g:
+                    continue
+
+            open_list.append(child)
 
 
 # -------------------------------------------------------------------
@@ -190,4 +200,6 @@ maze = Maze(
     end=end_point
 )
 
-a_star(maze, start_point, end_point)
+path = a_star(maze, start_point, end_point)
+
+print(path)
