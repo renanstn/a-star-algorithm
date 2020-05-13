@@ -1,6 +1,6 @@
 # A* (A Star) Algorithm
 
-Implementação de um algoritmo A* (A star)
+*Implementação de um algoritmo A* (A star) em Python.*
 
 Este algoritmo recebe um labirinto 2D, um **ponto de partida**, **um ponto de destino**, **onde ele pode "caminhar"**, e calcula a menor rota para chegar até o destino.
 
