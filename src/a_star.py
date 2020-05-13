@@ -4,10 +4,10 @@ class Maze:
     """
     def __init__(self, field, walkable, start, end):
         """
-        :field: Matriz que representa o labirinto
-        :walkable: Caractere que representa um caminho 'caminhável' no maze
-        :start: Ponto de início
-        :end: Ponto de destino
+        field: Matriz que representa o labirinto
+        walkable: Caractere que representa um node 'caminhável' no labirinto
+        start: Ponto de início
+        end: Ponto de destino
         """
         self.field = field
         self.walkable = walkable
@@ -38,9 +38,13 @@ class Maze:
     def print_maze_highlighting_nodes(self, nodes):
         """
         Printa o field, destacando as posições que receber na lista
-        Ideal para debuggar
+        Ideal para debuggar ou conferir o caminho encontrado
+        nodes: Uma lista de nodes ou uma lista de corrdenadas
         """
-        positions = [i.position for i in nodes]
+        if isinstance(nodes, Node):
+            positions = [i.position for i in nodes]
+        else:
+            positions = nodes
 
         for y in range(self.length):
             for x in range(self.width):
@@ -48,7 +52,7 @@ class Maze:
                     print(' * ', end='')
                 else:
                     print(' # ', end='')
-            print()
+            print() # Pula linha
 
 
 class Node:
@@ -119,13 +123,15 @@ class Node:
             if not self.maze.check_walkable_position(node_position):
                 continue
 
-            new_node = Node(maze, self, node_position)
+            new_node = Node(self.maze, self, node_position)
             childrens.append(new_node)
 
         return childrens
 
 
 def a_star(maze, start, end):
+    # TODO Dividir essa função em funções menores
+
     # Criar node de origem e destino
     start_node = Node(maze, None, start)
     start_node.g, start_node.h, start_node.f = 0, 0, 0
@@ -173,33 +179,3 @@ def a_star(maze, start, end):
                     continue
 
             open_list.append(child)
-
-
-# -------------------------------------------------------------------
-field = [
-    [0, 0, 1, 0, 0],
-    [0, 0, 1, 1, 0],
-    [0, 0, 0, 1, 1],
-    [0, 0, 0, 0, 1],
-    [0, 1, 1, 1, 1],
-    [0, 1, 0, 0, 0],
-    [0, 1, 0, 0, 0],
-    [1, 1, 0, 0, 0],
-]
-# Legenda:
-# 0: Wall
-# 1: Path
-
-start_point = (2, 0)
-end_point   = (0, 7)
-
-maze = Maze(
-    field=field,
-    walkable=1,
-    start=start_point,
-    end=end_point
-)
-
-path = a_star(maze, start_point, end_point)
-
-print(path)
