@@ -129,13 +129,13 @@ class Node:
         return childrens
 
 
-def a_star(maze, start, end):
+def a_star(maze, move_in_diagonals=False):
     # TODO Dividir essa função em funções menores
 
     # Criar node de origem e destino
-    start_node = Node(maze, None, start)
+    start_node = Node(maze, None, maze.start)
     start_node.g, start_node.h, start_node.f = 0, 0, 0
-    end_node = Node(maze, None, end)
+    end_node = Node(maze, None, maze.end)
     end_node.g, end_node.h, end_node.f = 0, 0, 0
 
     # Inicializar as listas
@@ -161,7 +161,7 @@ def a_star(maze, start, end):
             return path[::-1]
 
         # Adiciona como children os nodes adjacentes
-        childrens = current_node.get_childrens()
+        childrens = current_node.get_childrens(move_in_diagonals)
 
         for child in childrens:
             # Verifica se esta children já não foi verificada

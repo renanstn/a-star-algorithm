@@ -6,18 +6,18 @@ from a_star import Maze, a_star
 # 0: Parede
 # 1: Caminho
 field = [
-    [0, 0, 1, 0, 0],
-    [0, 0, 1, 1, 0],
-    [0, 0, 0, 1, 1],
-    [0, 0, 0, 0, 1],
     [0, 1, 1, 1, 1],
-    [0, 1, 0, 0, 0],
-    [0, 1, 0, 0, 0],
-    [1, 1, 0, 0, 0],
+    [1, 1, 1, 1, 0],
+    [1, 0, 0, 1, 1],
+    [1, 0, 0, 0, 1],
+    [0, 1, 1, 1, 1],
+    [0, 1, 0, 1, 0],
+    [0, 1, 0, 1, 1],
+    [1, 1, 0, 0, 1],
 ]
 
 # Define o ponto inicial e destino
-start_point = (2, 0)
+start_point = (4, 0)
 end_point   = (0, 7)
 
 # Instancia o Maze
@@ -29,7 +29,7 @@ maze = Maze(
 )
 
 # Chama a função que faz a magia
-path = a_star(maze, start_point, end_point)
+path = a_star(maze, move_in_diagonals=False)
 
 # Printa o resultado com essa função auxiliar
 maze.print_maze_highlighting_nodes(path)
