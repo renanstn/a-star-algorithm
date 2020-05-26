@@ -88,6 +88,6 @@ path = a_star(maze, move_in_diagonals=False)
 
 ## Créditos
 
-Este GIF maravilhoso e auto-explicativo veio [deste](https://atsushisakai.github.io/PythonRobotics/) repositório (que é maravilhoso, diga-se de passagem).
+O GIF que ilustra o algoritmo funcionando veio [deste](https://atsushisakai.github.io/PythonRobotics/) repositório (que é maravilhoso, diga-se de passagem).
 
 E o artigo que me baseei para fazer este estudo foi [este](https://medium.com/@nicholas.w.swift/easy-a-star-pathfinding-7e6689c7f7b2), porém fiz várias modificações para melhorar alguns pontos.
